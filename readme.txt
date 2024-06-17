@@ -1,1 +1,1 @@
-Another internal change in the file for git training
+Another internal change in the file for git training 2
