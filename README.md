@@ -1,87 +1,7 @@
-# Header training H1
-
-## Header training H2
-
-### Header training H3
-
-#### Header training H4
-
-##### Header training H5
-
-###### Header training H6
-
-## The line under the paragraph or header
-
-## Text above the line
-
-Text below the line
-
-## Space training
-
-Text before breaking  
-Text after breaking <br>
-Text after the second breaking
-
-## New paragraph
-
-line
-
-another line
-
-## Italics training
-
-_Italics_
-_Italics_
-
-## Half bolding of the text
-
-**Half bolded text**
-**Half boded text**
-
-## Crossed out text
-
-~~Crossed out text~~
-
-## Ordered list
-
-1. First list item.
-2. Second list item.
-
-## Unordered list
-
-- First list item
-- Second list item
-
-* First list item
-* Second list item
-
-## Link
-
-[Yandex](https://yandex.ru)
-
-## Link with title
-
-[Yandex](https://yandex.ru "I am and Yandex are together!")
-
-## Code грависы
-
-```bash
-ls - la
-```
-
-```html
-<h1>Header example created with html</h1>
-```
-
-## Highlighting of the text like a code
-
-```
-mkdir my_project
-cd my_project
-git init
-```
-
 # Git guide
+
+## Git is...
+Git is the version control system which helps to observe all the changes into the project.
 
 ## Abbreviations
 
@@ -92,6 +12,7 @@ VCS # _Version Control System_
 SCM # _Source Control Management_
 GUI # _Graphical User Interface_
 CLI # _Command line Interface_
+SSH # _Secure Shell_
 
 ### Commands Abbreviations
 
@@ -106,6 +27,10 @@ cat # _concatenate and print_
 rm # _remove_
 rmdir # _to remove directory_
 -r # _recursive_
+git init # _initialize_
+-f # _force_
+-m # _message_
+-v # _verbose_
 
 ## Gitbash download for Windows
 
@@ -182,3 +107,109 @@ brew install git # to install
 ```
 
 ## Git settings
+
+```
+git config --global user.name "your name" # to enter your name
+git config --global user.email youremail@yandex.ru # to enter your email
+```
+All the global settings the Git saves in .gitconfig in the home directory
+
+```
+cat ~/.gitconfig # to ensure your global settings
+git config --list # to see your global file content (email name)
+```
+
+## Create repository
+
+```
+git init # to make a repository instead of a folder, in the git folder all the information will be save
+rm -rf .git # to make reverse from git init command if you made a mistake
+```
+
+if you delete .git folder you will have only your local version of the project
+
+```
+git status # to check the condition of the repository
+git add --all # to prepare your new || modified files for commit 
+git add . # to add all the current folder 
+```
+
+green color of the file - the file is new or git know everything about all the changes in the file
+red color of the file - git doesn't know about the file or the file has been modified
+
+```
+git commit -m 'description of what changes in the project have done' #  to fix the version of your project
+git log # to see all the commits
+```
+
+## Github
+
+Github is a platform for storing your projects and its versions and where you can share your project with others or to use the projects of other programmers
+
+## SSH
+
+Computers are sharing data in the network, they follow to different network protocol
+
+Secure Shell Protocol provides the secure sharing of the data in the network
+
+SSH uses two types of the key:
+private key and public key
+
+private key # is keeping in your computer it's secret
+public key # is available for everybody and it is used for encrypt data
+
+```
+ls -la .ssh/ # to see the list of the ssh keys
+```
+
+### SSH generation
+
+```
+ssh-keygen -t ed25519 -C "your-email-connected to the github" # to create ssh key
+ssh-keygen -t rsa -b 4096 -C "your-email-connected to the github" # to create ssh key if you see a mistake after first command
+ls -a ~/.ssh # to check if the keys were truly generated
+```
+
+.pub # with the public ssh key
+no .pub # your little secret 
+
+### SSH Github connection
+
+after ssh-keygen command in the directory ~/.ssh will be created to files id_ed25519 and id_ed25519.pub or id _rsa and id_rsa.pub depends on your previous command respectively
+
+macOS
+
+```
+pbcopy < ~/.ssh/id_rsa.pub # to copy key content
+pbcopy < ~/.ssh/id_ed25519.pub # for ed25519
+```
+
+Windows
+
+```
+clip < ~/.ssh/id_rsa.pub # to copy key content
+clip < ~/.ssh/id_ed25519.pub # for ed25519
+ssh -T git@github.com # to check the accuracy of the ssh key after Github 
+```
+
+## Linking the local and remote repository
+
+copy your ssh from your repository in Github
+
+```
+git remote add origin git@github.com:%accont_name%/first-project.git
+```
+
+origin # standard name to connect with the main remote repo
+
+```
+git remote -v # to ensure that repoes are connected
+if success:
+origin    git@github.com:%account_name%/%Project-name%.git (fetch)
+origin    git@github.com:%account_name%/%Project-name%.git (push) 
+```
+
+```
+git push -u origin main || master # for the first push
+git push # to send the changes into remote repo after commit
+```
