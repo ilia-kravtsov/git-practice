@@ -7,42 +7,42 @@ Git is the version control system which helps to observe all the changes into th
 
 ### Global Abbreviations
 
-Git # _Global Information Tracker_ || _Goddamn Idiotic Truckload_
-VCS # _Version Control System_
-SCM # _Source Control Management_
-GUI # _Graphical User Interface_
-CLI # _Command line Interface_
-SSH # _Secure Shell_
+Git # _Global Information Tracker_ || _Goddamn Idiotic Truckload_ <br>
+VCS # _Version Control System_ <br>
+SCM # _Source Control Management_ <br>
+GUI # _Graphical User Interface_ <br>
+CLI # _Command line Interface_ <br>
+SSH # _Secure Shell_ <br>
 
 ### Commands Abbreviations
 
-pwd # _print working directory_
-cd # _change directory_
-ls # _list directory contents_
-cd # _change directory_
-mkdir # _make directory_
-cp # _copy_
-mv # _move_
-cat # _concatenate and print_
-rm # _remove_
-rmdir # _to remove directory_
--r # _recursive_
-git init # _initialize_
--f # _force_
--m # _message_
--v # _verbose_
+pwd # _print working directory_ <br>
+cd # _change directory_ <br>
+ls # _list directory contents_ <br>
+cd # _change directory_ <br>
+mkdir # _make directory_ <br>
+cp # _copy_ <br>
+mv # _move_ <br>
+cat # _concatenate and print_ <br>
+rm # _remove_ <br>
+rmdir # _to remove directory_ <br>
+-r # _recursive_ <br>
+git init # _initialize_ <br>
+-f # _force_ <br>
+-m # _message_ <br>
+-v # _verbose_ <br>
 
 ## Gitbash download for Windows
 
-[Gitbash](https://git-scm.com/download/win)
+[Gitbash](https://git-scm.com/download/win) <br>
 
 ## Terminal launching
 
-**Linux** - Ctrl+Alt+T
-**macOs** - Cmd+Space then enter - terminal
-**Windows** - just launch Gitbash wherever you want
+**Linux** - Ctrl+Alt+T <br>
+**macOs** - Cmd+Space then enter - terminal <br>
+**Windows** - just launch Gitbash wherever you want <br>
 
-'$' - the program is wating for your commands sir
+'$' - the program is wating for your commands sir <br>
 
 ## Git commands
 
@@ -134,7 +134,7 @@ git add --all # to prepare your new || modified files for commit
 git add . # to add all the current folder 
 ```
 
-green color of the file - the file is new or git know everything about all the changes in the file
+green color of the file - the file is new or git know everything about all the changes in the file <br>
 red color of the file - git doesn't know about the file or the file has been modified
 
 ```
