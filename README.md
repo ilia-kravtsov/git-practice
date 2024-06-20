@@ -1,6 +1,7 @@
 # Git guide
 
 ## Git is...
+
 Git is the version control system which helps to observe all the changes into the project.
 
 ## Abbreviations
@@ -112,6 +113,7 @@ brew install git # to install
 git config --global user.name "your name" # to enter your name
 git config --global user.email youremail@yandex.ru # to enter your email
 ```
+
 All the global settings the Git saves in .gitconfig in the home directory
 
 ```
@@ -130,8 +132,8 @@ if you delete .git folder you will have only your local version of the project
 
 ```
 git status # to check the condition of the repository
-git add --all # to prepare your new || modified files for commit 
-git add . # to add all the current folder 
+git add --all # to prepare your new || modified files for commit
+git add . # to add all the current folder
 ```
 
 green color of the file - the file is new or git know everything about all the changes in the file <br>
@@ -171,11 +173,11 @@ ls -a ~/.ssh # to check if the keys were truly generated
 ```
 
 .pub # with the public ssh key
-no .pub # your little secret 
+no .pub # your little secret
 
 ### SSH Github connection
 
-after ssh-keygen command in the directory ~/.ssh will be created to files id_ed25519 and id_ed25519.pub or id _rsa and id_rsa.pub depends on your previous command respectively
+after ssh-keygen command in the directory ~/.ssh will be created to files id_ed25519 and id_ed25519.pub or id \_rsa and id_rsa.pub depends on your previous command respectively
 
 macOS
 
@@ -189,7 +191,7 @@ Windows
 ```
 clip < ~/.ssh/id_rsa.pub # to copy key content
 clip < ~/.ssh/id_ed25519.pub # for ed25519
-ssh -T git@github.com # to check the accuracy of the ssh key after Github 
+ssh -T git@github.com # to check the accuracy of the ssh key after Github
 ```
 
 ## Linking the local and remote repository
@@ -206,10 +208,57 @@ origin # standard name to connect with the main remote repo
 git remote -v # to ensure that repoes are connected
 if success:
 origin    git@github.com:%account_name%/%Project-name%.git (fetch)
-origin    git@github.com:%account_name%/%Project-name%.git (push) 
+origin    git@github.com:%account_name%/%Project-name%.git (push)
 ```
 
 ```
 git push -u origin main || master # for the first push
 git push # to send the changes into remote repo after commit
 ```
+
+```
+git log --oneline # to get the short version of the log
+q # to quite from log watching
+```
+
+## Stasuses
+
+untracked || tracked, staged и modified
+
+untracked # git knows about that file but it doesn't watch for its changes
+
+staged # the status of the file after git add . command
+staging area also called as index or cache and the status of the file called indexed || cached
+
+tracked # the opposite of the untracked status, the file has tracked status after git commit command and git add . command
+
+modified # means that git has compared the content of the file with the last saved version and found the differences.
+For instance, if the file was commited and then changed afte that
+
+it all means that when the file has staged or modified status it is implied that file has tracked status as well
+
+## The classic file way
+
+```
+untracked => git add --all || . =>  staged (prepared for commit) + tracked (monitored) => git commit -m 'some commit' => tracked =>
+=> changes ? modified : tracked ;
+
+more detailed version:
+
+1. we have created a file, that means that Git doesn't monitor the content of the file, hence it's status is untracked (unmonitored)
+2. git add . # means that we have add the file into staging area, thus the file has 'staged' + 'tracked' statuses
+Perhaps, we have changed the file again, therefore the file has 'staged' + 'modified' + 'tracked' statuses
+Then we must say git add . again in order to convert 'modified' status and receive just 'staged' and 'tracked' statuses
+3. git commit -m 'some commit' # the file has 'tracked' status
+4. if we have changed our file again, thus we've received 'modified' and 'tracked' statuses
+5. git add . to add the file again into staging area, statuses 'staged' and 'tracked'
+6. git commit -m 'some commit', statuses: 'tracked'
+```
+
+## Use of git status
+
+'git status' shows only the following statuses:
+
+'staged' # changes to be committed
+'modified' # changes not staged for commit
+'untracked' untracked files
