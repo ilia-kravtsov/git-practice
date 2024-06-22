@@ -257,8 +257,149 @@ Then we must say git add . again in order to convert 'modified' status and recei
 
 ## Use of git status
 
+```
 'git status' shows only the following statuses:
 
 'staged' # changes to be committed
 'modified' # changes not staged for commit
 'untracked' untracked files
+```
+
+## Jira
+
+```
+Jira # a system for organization projects and tasks
+
+LGS # logistics
+239 # task number
+git commit -m "LGS-239: "Complement the list with new numbers"
+
+Conventional commits: <type>: <message>
+
+<type> examples:
+feat # 'feature' for new functionality
+fix # for mistakes correction
+
+for instance:
+git commit -m "feat: something new adding"
+```
+
+## how to correct the commit
+
+```
+--amend # to correct the commite that have already made, it works only with HEAD commit (the latest commit)
+
+git commit --amend
+
+git commit --amend # to complement a commit with new files
+
+touch main.html
+touch common.css
+git add main.html
+git commit -m 'main.html adding'
+git add common.css
+git commit --amend --no-edit # complementing of the previous commit with the new common.css file --no-edit means that the commit message needs to be save like in initial version
+
+just like that you can add any changes into the file which has already added into commit
+
+git add main.html
+git commit --amend --no-edit
+
+So what do we need to choose? a new commit or a new --amend? It depends on the situation
+
+git commit --amend -m 'New message' if you want to add a new message to the commit which has already been made
+
+if you forget to point out the --no-edit or -m flag Git will suggest you to correct the commit manually
+
+^X # means Ctrl+X to save the new message in nano
+```
+
+## Returning from staging area to 'untracked'
+
+```
+How to implement the 'unstage' of the changes
+
+git restore --staged <file>
+
+you've created and changed some file and added it into staging area with the help of git add but then if you need to return it, to eliminate it you can use:
+
+git restore --staged <file> # to undo the adding into staging area - to send back into 'untracked'
+
+restore means recover
+
+to send back all the files into 'untracked' you can use:
+
+git restore --staged . # roll back all the files in the directory
+
+## Roll back the commit
+
+git reset --hard <commit hash> # to roll back the version of the project to <commit hash> version
+
+for instance:
+
+git log --oneline
+
+7b972f5 (HEAD -> master) style: добавить комментарии, расставить отступы
+b576d89 feat: добавить массив Expenses и цикл для добавления трат # вот сюда и вернёмся
+4b58962 refactor: разделить analyzeExpenses() на countSum() и saveExpenses()
+
+git reset --hard b576d89
+
+HEAD is now at b576d89 feat: добавить массив Expenses и цикл для добавления трат
+```
+
+7b972f5 has just been deleted
+
+## Rolling back the changes which didn't get neither in staging nor into commit
+
+```
+git restore <file> # to roll back changes to a file that cannot be changed
+```
+
+## Conclude
+
+```
+git restore --staged <file> # to return from 'staged' || 'modified' into 'untracked'
+git reset --hard <commit hash> # to roll back the history until the hash with <commit hash> number
+git restore <file> # to roll back the changes into the file until the last saved version
+```
+
+## Watching for the changes into the commits
+
+```
+git diff # to see the difference
+
+git diff doesn't show the changes into 'staged files only in 'modified'
+
+to see the changes in 'staged' files you need to use flag --staged
+
+git diff --staged # to see the changes in 'staged'files comparatively to the latest committed versions
+```
+
+## Comparing the commits
+
+```
+echo 'hello!' # to show on the console what you give it as a parametr
+hello!
+
+
+However with >>
+
+echo 'second line of the file' >> file.txt # it will write the line into the file
+
+$ cat file.txt
+Первая строка файла
+
+$ echo "Вторая строка файла" >> file.txt
+$ cat file.txt
+Первая строка файла
+Вторая строка файла
+
+Likewise > will also redirect the out of the command into the file, but it will erase all the content in the file at first.
+
+$ cat file.txt
+Первая строка файла
+$ echo "Новая строка" > file.txt
+$ cat file.txt
+Новая строка
+```
