@@ -402,4 +402,192 @@ $ cat file.txt
 $ echo "Новая строка" > file.txt
 $ cat file.txt
 Новая строка
+
+git diff eba6256 4577927 # to see the difference between two commits
+git diff <the end of the tale> <beginning>
 ```
+## The ingnoring of the files in Git
+
+```
+.gitignore files are acceptable only for new untracked files. If the file has already got in the staging area or in the commit, then the rules didn't influence at him
+
+if the line begins with '#' then it's a comment and .gitignore won't consider it
+
+# here is an example of the comment
+# it means nothing for the .gitignore file
+# but they could be useful to comprehend, why this or that rule was added
+
+.DS_Store # to ignore all the files with the name of .DS_Store
+
+.DS_Store # for macOS
+
+* # corresponds to any line including the empty one
+
+for instance: 
+
+*.jpeg # to ignore all the files which ends in .jpeg
+
+docs/*/tmp # to ignore all the files 'tmp' in all subfolders the docs folder
+
+if you set a rule which consists only of a *, then Git will ignore all the files
+```
+### The question mark ?
+
+The question mark corresponds to any one character
+
+```
+file?.txt # to ingnore files: fileA.txt, file1.txt, however not the file12.txt because there are two characters after 'file' name, not one.
+```
+### Square brackets []
+
+The square brackets, as a question mark, corresponds to one character
+In this case, the symbol is not any, but only from the list that is indicated in parentheses.
+
+```
+file[0-2].txt # to ignore all the files file0.txt, file1.txt, file2.txt, however to point out that file3.txt won't be ignored
+
+it's also possible to set [abc] or [a-z] range
+```
+### Slash /
+
+if the thumb in .gitignore starts with '/' then Git will ignore all the files and catalogs only in the root directory
+
+```
+/ # it points at catalogs 
+/todo.txt # to ignore todo.txt in the root of the repo, so that subdir/todo.txt is still being tracked
+todo.txt # to ignore todo.txt in all of the folders
+build/ # to ignore the build folder, however is build is a simple file this command will be ignored
+
+# ignore files "docs/current/tmp", "docs/old/tmp",
+# also "docs/old/saved/a/b/c/d/tmp"
+# and even "docs/tmp", because zero of inluded folders are already invested
+docs/**/tmp
+
+# игнорировать только "docs/current/tmp" и "docs/old/tmp"
+# файл "docs/old/saved/a/b/c/d/tmp" не попадает в правило
+docs/*/tmp 
+
+** # has the same effect as *
+```
+
+### Exclamation mark !
+
+```
+Any rule in the .gitignore file can be inverted with the help of '!'
+
+*.jpeg # to ignore all the JPEG files
+
+!doge.jpeg # all the JPEG files except doge
+```
+
+### .gitignore example
+
+```
+# to ignore all the files in the build catalog
+build/
+
+# to ignore all the .log files
+*.log
+
+# do not ignore *.log files in examples
+!examples/**/*.log 
+```
+
+Files in the .gitignore doesn't appear after git status command, otherwise they would be clogged the output
+
+```
+git status --ignored # if you still need to display all ignored files add '--ignored'
+```
+To ignore all the files except .tex and .pdf
+**
+!**.tex
+!**.pdf
+
+## Cloning the repo
+
+The process of the copying of the remote repo in your local PC called 'cloning'
+
+```
+git clone git@github.com:yandex-praktikum/git-clone-lesson.git # copy from 'Copy' => 'SSH'
+```
+
+git clone # automatically connected the local and the remote repositories
+
+```
+git remote -v # to ensure that the repositories are connected together
+```
+
+## Fork
+
+In contrast to 'cloning' 'fork' doesn't load the alien repository on your PC but it will copy that repo into your Github account 
+
+Fork - "развилка", "ответвление", "вилка :D" doesn't connect directly to the Git
+
+In process of 'Fork' creates all the files copy, commits and branches history. That copy saves in your Github account
+
+Reasons to use fork:
+  You want to add your personal contribute to the project, however you don't have the rule rights to change that repository (open source).
+  Then you can do 'fork' add necessary fixes and then send a request to include these changes in the original project 
+
+  You want to develop the project regardless of its initial version. Let's say the creators of the project made up their mind that they won't add functionality, that you need. In this case, you can make a 'fork' and add it by yourself.
+
+chmod +x check.sh # this command will make the file executable
+
+./check.sh # this command will implement the script
+
+## Branch. What is it?
+
+Imagine: your work project has been launched and it already has users. You have an idea how to speed it up. But we need to conduct an experiment — change the code and see if the program will run faster. In the process, it is important to cooperate with colleagues and not break anything — branches will help in this.
+
+```
+Branch - it's an isolated project development flow
+```
+
+Branches allow you to make an experiment with the Git project, however at the same time to save up the repository in a stable condition. Each member of the team can work in his own branch and not bother the others: commits which will be executed by him won't be visible from other branches. And when the work is done the branches can be merged.
+
+Branches are useful even if you are working alone — for example, on a website. Before writing new functionality, you should create a separate branch for it. Branches also allow one person to switch between several tasks at once.
+
+The main, stable version of the project is keeping in the main branch 'main' or 'master'. It appears automatically during the repository creation process. Often, all the news branches in the repo depart from main, although this is not the rule
+
+### To look at the project branches
+
+```
+git branch # to check if the main branch has appeared
+
+* # indicates in what branch you are right now
+```
+
+## Branches creating
+
+```
+git branch <the branch name>
+```
+
+The branch name can consist of letters, numbers and also includes any of these characters: . - _ /. Those symbols don't make much sense. For instance: feature/add-branch-info could be called as feature_add-branch-info or feature-add-branch
+
+git branch feature/add-branch-info # we have created a new branch 
+git branch # we have looked at the other branches
+  
+  feature/add-branch-info  # a new one has appeared
+* main                     # * means we are in the main branch 
+
+### Branch naming
+
+To create the branch name we will use pointers, sush as:
+feature || bugfix
+after that there will be a slash / and then some description of the task
+/adding-branch-info # no spaces in that description!
+
+### Switching from one branch to another
+
+```
+git checkout <branch name> # to switch to another branch
+Bash answer: Switched to branch <branch name>
+
+git branch
+* feature/add-branch-info
+  main
+
+git checkout -b <branch name> # to create a branch and switch to it immediately
+```
+
